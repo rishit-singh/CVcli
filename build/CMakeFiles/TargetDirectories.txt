@@ -1,0 +1,3 @@
+/Users/rishit/src/repos/CVcli/build/CMakeFiles/CVcli.dir
+/Users/rishit/src/repos/CVcli/build/CMakeFiles/edit_cache.dir
+/Users/rishit/src/repos/CVcli/build/CMakeFiles/rebuild_cache.dir
