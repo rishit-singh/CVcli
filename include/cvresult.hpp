@@ -19,20 +19,17 @@ namespace CVcli
         cv::Mat Image;
 
         bool IsValid();
-
         bool Display();
 
         bool Flush(std::string_view);
 
-        CVResult(std::string_view id = nullptr, cv::Mat image = cv::Mat()) : ID(id), Image(image)
-        {
-            this->OutputFile = FileIO::CreateFilePath(id, FileIO::FileType::PNG);
-        }
+        CVResult();
+        CVResult(std::string_view, cv::Mat, std::string_view);
 
-        CVResult(std::string_view id, cv::Mat image, std::string_view outputFile) : ID(id), Image(image)
+        /*CVResult(std::string_view id, cv::Mat image, std::string_view outputFile) : ID(id), Image(image)
         {
             this->OutputFile = outputFile;
-        }
+        }*/
     };
 
     typedef CVResult (*OperationCallBack)(cv::Mat, std::vector<int>);
