@@ -1,12 +1,21 @@
 #include "cvresult.hpp"
+#include "fileio.hpp"
 
 namespace CVcli
 {
+    CVResult::CVResult() : ID(std::string_view()), Image(cv::Mat()), OutputFile(std::string_view())
+    {
+    }
+
+    CVResult::CVResult(std::string_view id, cv::Mat image, std::string_view outputFile) : ID(id), Image(image), OutputFile(outputFile)
+    {
+        this->OutputFile = FileIO::CreateFilePath(id, FileIO::FileType::PNG);
+    }
+
     bool CVResult::IsValid()
     {
         return (this->ID.length() && !this->Image.empty());
     }
-
 
     bool CVResult::Display()
     {
@@ -26,4 +35,5 @@ namespace CVcli
 
         cv::imwrite(fileName.data(), this->Image);
     }
+
 } // namespace CVcli

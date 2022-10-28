@@ -21,18 +21,10 @@ namespace CVcli
         std::string_view Keyword;
         std::vector<std::string_view> Parameters;
 
+        Command(char**);
 
-        Command(char** argv = nullptr)
-        {
-            this->Keyword = std::string_view(argv[0], CVcli::Tools::StrLen(argv[0]));
-            this->Parameters = std::vector<std::string_view>();
-        }
-
-        Command(std::string_view keyword, std::vector<std::string_view> parameters)
-        {
-        }
+        Command(std::string_view keyword, std::vector<std::string_view> parameters);
     };
-
 
     class Operation
     {
@@ -42,7 +34,6 @@ namespace CVcli
 
             Command OperationCommand;
     public:
-
             void SetCallBack(OperationCallBack callback)
             {
                 this->Callback = callback;
@@ -55,11 +46,10 @@ namespace CVcli
 
             CVResult Execute()
             {
-
                 return CVResult();// return this->Callback(, );
             }
 
-            Operation() : Result(), OperationCommand()
+            Operation() : Result(), OperationCommand(Command(nullptr))
             {
             }
 
@@ -68,6 +58,11 @@ namespace CVcli
             }
     };
 
+    extern std::vector<Operation> Operations;
+
+    Operation& AddOperation(Operation);
 }
+    // namespace CVcli
+
 #endif //
       //

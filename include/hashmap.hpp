@@ -141,8 +141,7 @@ public:
         }
 
         LinkedList() : Head(nullptr)
-        {
-        }
+        {}
 
         LinkedList(T value)
         {

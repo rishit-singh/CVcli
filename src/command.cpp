@@ -2,20 +2,19 @@
 
 namespace CVcli
 {
-    bool CVResult::IsValid()
+    void Command::Initialize()
     {
-        return (this->ID.length() && !this->Image.empty());
     }
 
-
-    bool CVResult::Display()
+    Command::Command(char** args)
     {
-        if (!this->IsValid())
-            return false;
+        std::vector<std::string_view> params;
 
-        cv::imshow(this->ID.data(), this->Image);
-        cv::waitKey(0);
+        this->Keyword = (params = Tools::GetStringViewArray(args))[0];
+        this->Parameters = Tools::GetSubArray<std::string_view>(params, 1, params.size() - 1);
+    }
 
-        return true;
+    Command::Command(std::string_view keyword, std::vector<std::string_view> parameters) : Keyword(keyword), Parameters(parameters)
+    {
     }
 }

@@ -27,6 +27,12 @@ namespace CVcli::Tools
         return length;
     }
 
+
+    static bool InRange(long val, long min, long max)
+    {
+        return (val >=  min && val < max);
+    }
+
     static double Pow(int number, int power)
     {
         double powered = 1;
@@ -65,7 +71,6 @@ namespace CVcli::Tools
         return ints;
     }
 
-
     static std::vector<std::string_view> GetStringViewArray(char** strings, unsigned int start = 0)
     {
         std::vector<std::string_view> stringArray = std::vector<std::string_view>();
@@ -85,34 +90,61 @@ namespace CVcli::Tools
         int byteSize = 0,
             size = strings.size();
 
-
         for (int x = 0; x < size; x++)
             byteSize += strings[x].size();
 
         return size;
     }
 
-    static std::string_view ConcatStrings(std::vector<std::string_view> strings)
+
+
+    static std::string_view ConcatStrings(std::vector<std::string_view> strings, std::string_view delimiter = "")
     {
         int size = strings.size(),
+            size1,
             temp = 0,
-            byteSize;
+            byteSize,
+            delimitSize;
 
-        char concatString[(byteSize = GetByteSize(strings))];
+        char concatString[(byteSize = GetByteSize(strings) + (delimitSize = delimiter.size()) * size)];
 
+        int y;
 
         for (int x = 0; x < size; x++)
         {
+            size1 = strings[x].size();
 
-            for (int y = 0; y < strings[x].size(); )
+            for (y = 0; y < size1; y++)
                 concatString[temp + y] = strings[x][y];
+
+            for (int z = 0; z < delimitSize; z++) // sets the delimiter
+                concatString[temp + y + z] = delimiter[z];
 
             temp = strings[x].size();
         }
 
         return std::string_view(concatString, byteSize);
     }
+
+    template<typename T>
+    static std::vector<T> GetSubArray(std::vector<T> array, int start, int end)
+    {
+        int size;
+
+        std::vector<T> subArray = std::vector<T>();
+
+
+        if (!Tools::InRange(end, 0, (size = array.size())) && !Tools::InRange(start, 0, end))
+            return std::vector<T>();
+
+        subArray.resize((end + 1) - start);
+
+        for (int x = start; x < end + 1; x++)
+            subArray[x - start] = array[x];
+
+        return subArray;
+    }
 }
-// namespace CVcl/
+// namespace CVcli
 //
 #endif // TOOLS_H_

@@ -12,6 +12,6 @@ find_package(OpenCV REQUIRED)
 
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 include_directories( include/ )
-
-add_executable(CVcli src/main.cpp)
+add_executable(CVcli ${CVcli_SOURCES})
+#add_executable(CVcli src/main.cpp)
 target_link_libraries(CVcli ${OpenCV_LIBS})

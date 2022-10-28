@@ -3,10 +3,12 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
 #include <string_view>
-
+#include <cstring>
 #include "command.hpp"
 #include "hashmap.hpp"
 #include "tools.hpp"
+#include "cvinstance.hpp"
+#include <stdlib.h>
 
 template <typename T>
 static void PrintArray(std::vector<T> array)
@@ -21,19 +23,27 @@ static void PrintArray(std::vector<T> array)
 
 
 //static inline CVcli::Operation Operations[] = {
-  //  CVcli::Operation(CVcli::Command("", {}), []() {})};
-
+//  CVcli::Operation(CVcli::Command("", {}), []() {})};
 
 
 
 int main(int argc, char **argv)
 {
-    Hashmap<std::string_view, int> hashmap = Hashmap<std::string_view, int>();
+   // Hashmap<std::string_view, int> hashmap = Hashmap<std::string_view, int>();
+
+    cv::Mat image = cv::Mat();
+
+    image = CVcli::CVInstance::LoadImage(argv[1]);
+
+
+    cv::imshow(argv[1], image(cv::Range(0, atoi(argv[2])), cv::Range(0, atoi(argv[3]))));
+    cv::waitKey(0);
+
+    cv::destroyAllWindows();
 
     // hashmap.AddValue(78
     //"foo", 1);
     // std::cout << CVcli::Tools::BufferLen<char*>(argv);
-    PrintArray<int>(CVcli::Tools::StringsToInt(CVcli::Tools::GetStringViewArray(argv)));
 
 
 //    std::cout << CVcli::Tools::Pow(atoi(argv[1]), atoi(argv[2]));
@@ -46,4 +56,3 @@ int main(int argc, char **argv)
 */
     return 0;
 }
-
