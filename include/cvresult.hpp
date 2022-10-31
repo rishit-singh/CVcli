@@ -32,7 +32,7 @@ namespace CVcli
         }*/
     };
 
-    typedef CVResult (*OperationCallBack)(cv::Mat, std::vector<int>);
+    typedef CVResult (*OperationCallBack)(std::vector<std::string_view>);
 }
 
 #endif // CVRESULT_H_
