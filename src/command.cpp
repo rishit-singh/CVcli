@@ -17,4 +17,12 @@ namespace CVcli
     Command::Command(std::string_view keyword, std::vector<std::string_view> parameters) : Keyword(keyword), Parameters(parameters)
     {
     }
+
+    std::vector<Operation> Operations = std::vector<Operation>();
+
+    Operation& AddOperation(Operation operation)
+    {
+        Operations.push_back(operation);
+        return Operations.at(Operations.size() - 1);
+    }
 }
