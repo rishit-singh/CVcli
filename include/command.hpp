@@ -35,9 +35,11 @@ namespace CVcli
     public:
             Command OperationCommand;
 
-            void SetCallBack(OperationCallBack callback)
+            Operation& SetCallBack(OperationCallBack callback)
             {
                 this->Callback = callback;
+
+                return *this;
             }
 
             CVResult GetResult()
@@ -45,9 +47,9 @@ namespace CVcli
                 return this->Result;
             }
 
-            CVResult Execute()
+            CVResult Execute(std::vector<std::string_view> commands)
             {
-                return CVResult();// return this->Callback(, );
+                return (this->Result = this->Callback(commands));// return this->Callback(, );
             }
 
             Operation() : Result(), OperationCommand(Command(nullptr))

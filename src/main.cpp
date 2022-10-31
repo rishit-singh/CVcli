@@ -5,6 +5,8 @@
 #include <string_view>
 #include <cstring>
 #include "command.hpp"
+#include "cvresult.hpp"
+#include "cli.hpp"
 #include "fileio.hpp"
 #include "hashmap.hpp"
 #include "tools.hpp"
@@ -22,14 +24,27 @@ static void PrintArray(std::vector<T> array)
     std::cout << '\n';
 }
 
+CVcli::CVResult Crop(std::vector<std::string_view> params)
+{
+
+
+    return CVcli::CVResult();
+}
+
 
 int main(int argc, char **argv)
 {
    // Hashmap<std::string_view, int> hashmap = Hashmap<std::string_view, int>();
 
-    cv::Mat image = cv::Mat();
+   CVcli::AddOperation(CVcli::Operation(CVcli::Command("crop", { "" }), Crop));
 
-    std::cout << CVcli::Tools::ConcatStrings(CVcli::Tools::GetStringViewArray(argv), "  ");/// CVcli::FileIO::CreateFilePath("somefile", CVcli::FileIO::FileType::JPG) << std::endl;
+   CVcli::CLI::ExecuteCommand(CVcli::Tools::GetStringViewArray(argv));
+
+   std::cout << CVcli::Operations.size() << std::endl;
+
+ //  cv::Mat image = cv::Mat();
+
+   //std::cout << CVcli::Tools::ConcatStrings(CVcli::Tools::GetStringViewArray(argv), "  ");/// CVcli::FileIO::CreateFilePath("somefile", CVcli::FileIO::FileType::JPG) << std::endl;
 
 
   //  image = CVcli::CVInstance::LoadImage(argv[1]);
