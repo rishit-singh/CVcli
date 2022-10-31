@@ -10,7 +10,7 @@ namespace CVcli
         OperationUsage("crop", "crops the provided file to the provided ranges or resolutions.")
     };
 
-    OperationUsage::OperationUsage(std::string_view operation = "", std::string_view usage = "") : Operation(operation), Usage(usage)
+    OperationUsage::OperationUsage(std::string_view operation, std::string_view usage) : Operation(operation), Usage(usage)
     {
     }
 

@@ -27,8 +27,11 @@ static void PrintArray(std::vector<T> array)
 CVcli::CVResult Crop(std::vector<std::string_view> params)
 {
 
+    cv::Mat imageMatrix = CVcli::CVInstance::LoadImage(params[0]);
 
-    return CVcli::CVResult();
+    std::vector<int> values = CVcli::Tools::StringsToInt(CVcli::Tools::GetSubArray(params, 1, params.size()));
+
+    return CVcli::CVResult(params[0], imageMatrix(cv::Range(values[0], values[1]), cv::Range(values[2], values[3])), "output.png");
 }
 
 
@@ -38,7 +41,12 @@ int main(int argc, char **argv)
 
    CVcli::AddOperation(CVcli::Operation(CVcli::Command("crop", { "" }), Crop));
 
-   CVcli::CLI::ExecuteCommand(CVcli::Tools::GetStringViewArray(argv));
+   std::vector<std::string_view> args;
+
+   CVcli::CVResult result;
+
+   if ((result = CVcli::CLI::ExecuteCommand(CVcli::Tools::GetSubArray(args = CVcli::Tools::GetStringViewArray(argv), 1, args.size()))).IsValid())
+       result.Display();
 
    std::cout << CVcli::Operations.size() << std::endl;
 
