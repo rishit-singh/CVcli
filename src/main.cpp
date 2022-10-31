@@ -5,6 +5,7 @@
 #include <string_view>
 #include <cstring>
 #include "command.hpp"
+#include "fileio.hpp"
 #include "hashmap.hpp"
 #include "tools.hpp"
 #include "cvinstance.hpp"
@@ -22,37 +23,16 @@ static void PrintArray(std::vector<T> array)
 }
 
 
-//static inline CVcli::Operation Operations[] = {
-//  CVcli::Operation(CVcli::Command("", {}), []() {})};
-
-
-
 int main(int argc, char **argv)
 {
    // Hashmap<std::string_view, int> hashmap = Hashmap<std::string_view, int>();
 
     cv::Mat image = cv::Mat();
 
-    image = CVcli::CVInstance::LoadImage(argv[1]);
+    std::cout << CVcli::Tools::ConcatStrings(CVcli::Tools::GetStringViewArray(argv), "  ");/// CVcli::FileIO::CreateFilePath("somefile", CVcli::FileIO::FileType::JPG) << std::endl;
 
 
-    cv::imshow(argv[1], image(cv::Range(0, atoi(argv[2])), cv::Range(0, atoi(argv[3]))));
-    cv::waitKey(0);
+  //  image = CVcli::CVInstance::LoadImage(argv[1]);
 
-    cv::destroyAllWindows();
-
-    // hashmap.AddValue(78
-    //"foo", 1);
-    // std::cout << CVcli::Tools::BufferLen<char*>(argv);
-
-
-//    std::cout << CVcli::Tools::Pow(atoi(argv[1]), atoi(argv[2]));
-    /*c
-     * v::Mat image = (cv::imread(argv[1], cv::IMREAD_COLOR));
-
-    cv::imshow(argv[1], image);
-
-    cv::waitKey(0);
-*/
     return 0;
 }

@@ -34,9 +34,8 @@ namespace CVcli
         for (int x = 0; x < size; x++)
             usageStrings.push_back(OperationUsages.at(x).ToString());
 
+
         return Tools::ConcatStrings(usageStrings);
     }
 
 }
-
-;

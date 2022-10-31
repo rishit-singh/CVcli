@@ -32,8 +32,9 @@ namespace CVcli
             CVResult Result;
             OperationCallBack Callback;
 
-            Command OperationCommand;
     public:
+            Command OperationCommand;
+
             void SetCallBack(OperationCallBack callback)
             {
                 this->Callback = callback;
@@ -58,11 +59,24 @@ namespace CVcli
             }
     };
 
+    static std::vector<Operation>& OperationSort(std::vector<Operation>& array)
+    {
+        int size = array.size();
+
+        for (int x = 0; x < size; x++)
+            for (int y = 0; y < size - x - 1; y++)
+                if (Tools::StrCmp(array[x].OperationCommand.Keyword, array[x + 1].OperationCommand.Keyword) < 0)
+                    Tools::Swap<Operation>(&array[x], &array[x + 1]);
+
+        return array;
+    }
+
     extern std::vector<Operation> Operations;
 
     Operation& AddOperation(Operation);
 }
     // namespace CVcli
+
 
 #endif //
       //

@@ -60,6 +60,7 @@ namespace CVcli::Tools
 
         return 0;
     }
+    
 
     static bool InRange(long val, long min, long max)
     {
@@ -123,7 +124,6 @@ namespace CVcli::Tools
         int byteSize = 0,
             size = strings.size();
 
-
         for (int x = 0; x < size; x++)
             byteSize += strings[x].size();
 
@@ -153,7 +153,7 @@ namespace CVcli::Tools
                 std::cout << (concatString[(temp  + size1 + z)] = delimiter[z]) << temp + size1 << std::endl;
 
             temp = size1 + delimitSize;
-        }
+
 
         return std::string_view(concatString, byteSize);
     }
