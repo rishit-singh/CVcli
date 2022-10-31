@@ -8,7 +8,8 @@
 
 namespace CVcli::CVInstance
 {
-    cv::Mat LoadImage(std::string_view path);
+    cv::Mat LoadImage(std::string_view);
+    void DisplayImage(cv::Mat);
 }
 
 #endif // CVINSTANCE_H_
